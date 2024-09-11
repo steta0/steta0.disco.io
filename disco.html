@@ -1,0 +1,2120 @@
+<!DOCTYPE html>
+<html lang="en" type="text/HTML">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<title>✨ disco ✨</title>
+		<meta property="og:url" content="">	<!-- TODO : set file URL -->
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="✨ disco ✨">
+		<meta property="og:description" content="✨ disco ✨">
+		<meta name="description" content="✨ disco ✨">
+		<meta property="og:image" content="" itemprop="image">
+		<meta property="og:image:url" content="" itemprop="image">
+		<meta property="og:image:type" content="image/WebP">
+		<meta property="og:image:width" content="576">
+		<meta property="og:image:height" content="576">
+		<meta property="og:image:alt" content="logo">
+		<link rel="alternate icon" class="js-site-favicon" type="image/webp" href="">
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale:alternate" content="en_GB" />
+		<meta property="og:locale:alternate" content="it_IT" />
+		<style>
+/*			* {
+				border: 0 solid white;
+				margin: 0;
+				padding: 0;
+				user-select: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+			}
+			body {
+				background-image: url('./sfondo.PNG');
+				background-size: cover;
+				background-repeat: no-repeat;
+				overflow: hidden;
+				color: white;
+			}*//*
+			.bonus {
+				transform: translate(75%, -50%);
+				text-shadow:
+					0 0 10px currentColor,
+					0 0 20px currentColor,
+					0 0 30px currentColor,
+					0 0 40px currentColor,
+					0 0 50px currentColor,
+					0 0 60px currentColor;
+			}*//*
+			.enemy {
+				opacity: 2;
+				font-size: 10px;
+				transition: 600ms;
+				transition-timing-function: linear;
+				position: absolute;
+				color: red;
+				text-shadow: 0 0 10px currentColor;
+			}*/
+			#bonus {
+				text-align: center;
+				position: absolute;
+				transform: translate(50%);
+				right: 50%;
+				top: 45%;
+				opacity: 0.70;
+			}
+			#attuale {
+				position: absolute;
+				transform: translate(50%);
+				right: 50%;
+				top: 25%;
+				opacity: 0.60;
+			}
+			#record {
+				transform: translate(100%);
+				position: absolute;
+				right: 97%;
+				top: 5%;
+				opacity: 0.80;
+			}
+			/*#cadi {
+				position: absolute;
+				transform: translate(50%);
+				right: 50%;
+				top: 70%;
+				opacity: 0.70;
+				color: red;
+				display: none;
+			}*/
+			/*#disco {
+				font-size: 10px;
+				transform: translate(40%);
+				transition-duration: 150ms;
+				position: absolute;
+				top: 50%;
+				right: 50%;
+			}
+			#traguardo {	
+				z-index: 2;
+				font-size: 10px;
+				transform: translate(40%);
+				color: #0F0;
+				position: absolute;
+				text-shadow:
+					0 0 10px #00ff00,
+					0 0 20px #00ff00,
+					0 0 30px #00ff00,
+					0 0 40px #00ff00,
+					0 0 50px #00ff00,
+					0 0 60px #00ff00,
+					0 0 70px #00ff00;
+			}*/
+			#left {
+				position: absolute;
+				top: 0%;
+				right: 50%;
+				height: 100%;
+				width: 100%;
+				opacity: 0;
+			}
+			#right {
+				position: absolute;
+				top: 0%;
+				right: 0%;
+				height: 100%;
+				width: 50%;
+				opacity: 0;
+			}
+			#up {
+				position: absolute;
+				top: -5%;
+				width: 50%;
+				height: 40%;
+				right: 25%;
+				z-index: 2;
+				border: 3px solid #21c0f4;
+				background-color: transparent;
+				display: none;
+				box-shadow:
+					0 0 5px #00bfff,
+					0 0 15px #00bfff;
+			}
+			#down {
+				position: absolute;
+				top: 65%;
+				width: 50%;
+				height: 40%;
+				right: 25%;
+				z-index: 2;
+				border: 3px solid #21c0f4;
+				background-color: transparent;
+				display: none;
+				box-shadow:
+					0 0 5px #00bfff,
+					0 0 15px #00bfff;
+			}
+		</style>
+		<style type="text/CSS">
+			:root {
+				-ms-touch-action: pan-x pan-y;
+					touch-action: pan-x pan-y;
+				height: 100%;
+			}
+			* {
+				display: inline-block;
+				position: absolute;
+				border: 0 solid white;
+				margin: 0;
+				padding: 0;
+				user-select: none;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				transition-duration: 200ms;
+			}
+			body {
+				overflow: hidden;
+				background: black;
+			}
+			.main {
+				display: block;
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			.disco {
+				display: block;
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				color: white;
+				transition-duration: 140ms;
+			}
+			.disco > .background {
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background: black;
+				z-index: -65536;
+			}
+			.disco > .background > .image {
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-image: radial-gradient(circle at center, transparent,black),url('./sfondo.png');
+				background-color: black;
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;
+				filter: grayscale(30%);
+				z-index: -32768;
+			}
+			.disco > .pageArea {
+				display: flex;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				flex-direction: column;
+				flex-wrap: nowrap;
+				align-items: stretch;
+				justify-content: flex-start;
+				align-content: center;
+				font-size: 2em;
+			}
+			.disco > .pageArea > .button {
+				position: relative;
+				background: rgba(100,80,110,.8);
+				width: 100%;
+				min-width: 10em;
+				min-height: 1em;
+				padding: .4em;
+				font-weight: bolder;
+				color: rgba(256,100,206,.97);
+				border-radius: .3em;
+				font-size: 1em;
+			}
+			.disco > .pageArea > .button:hover {
+				background: rgba(208,166,218,.8);
+				color: rgba(65,52,68,.8);
+				transform: rotate(.02turn) scale(1.05);
+			}
+			.discoPlayground {
+				display: block;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				transition-duration: 50ms;
+			}
+			.discoPlayground > .entity {
+				width: fit-content;
+				display: block;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+			}
+			.discoPlayground > .entity.player {
+				display: block;
+				position: absolute;
+				color: white;
+				font-size: .3em;
+				text-shadow:
+					0 0 10px currentColor,
+					0 0 15px currentColor,
+					0 0 20px currentColor,
+					0 0 30px currentColor;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+		<style type="text/css" id="enemy">
+			.discoPlayground > .entity.enemy {
+				z-index: 20;
+				position: absolute;
+				opacity: 1;
+				font-size: .5em;
+				transition: 600ms;
+				transition-timing-function: linear;
+				color: red;
+				text-shadow: 0 0 10px currentColor;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+		<style id="goals">
+			.discoPlayground > .entity.goal {
+				position: absolute;
+				z-index: 15;
+				font-size: .5em;
+				transform: translate(-50%,-50%);
+				color: rgba(0,255,0,1);
+				text-shadow:
+					0 0 10px #00ff00,
+					0 0 20px #00ff00,
+					0 0 30px #00ff00,
+					0 0 40px #00ff00,
+					0 0 45px #00ff00,
+					0 0 50px #00ff00,
+					0 0 60px #00ff00,
+					0 0 70px #00ff00;
+				transform: translate(-50%,-50%);
+			}
+		</style>
+		<style>
+			.discoPlayground > .entity.bonus {
+				display: block;
+				position: absolute;
+				transform: translate(-50%,-50%);
+				text-shadow:
+					0 0 10px currentColor,
+					0 0 20px currentColor,
+					0 0 30px currentColor,
+					0 0 40px currentColor,
+					0 0 50px currentColor,
+					0 0 60px currentColor;
+				color: rgba(140,140,140,.97);
+				font-size: 2.2em;
+				z-index: 14;
+			}
+			.discoPlayground > .recordAlert {
+				display: block;
+				position: absolute;
+				left: 4%;
+				top: 4%;
+				font-size: .8em;
+				font-weight: bolder;
+/*				border: 1px solid rgba(80,70,70,.78);*/
+				padding: .4em 2em;
+				color: rgba(256,80,42,.95);
+/*				border-radius: .4em;*/
+				filter: saturate(.625);
+			}
+			.discoPlayground > .recordPlaygroundAlert {
+				display: block;
+				position: absolute;
+				right: 4%;
+				top: 1.5em;
+				font-size: .8em;
+				font-weight: bolder;
+/*				border: 1px solid rgba(80,70,70,.78);*/
+				padding: .4em 2em;
+				color: rgba(256,80,42,.95);
+/*				border-radius: .4em;*/
+				filter: saturate(.625);
+			}
+			.discoPlayground > .levelLastAlert {
+				display: block;
+				position: absolute;
+				right: 4%;
+				top: calc(4% + 2.5em);
+				font-size: .8em;
+				font-weight: bolder;
+/*				border: 1px solid rgba(75,75,70,.78);*/
+				padding: .4em 2em;
+				color: rgba(168,168,42,.95);
+/*				border-radius: .4em;*/
+				filter: saturate(.625);
+			}
+			.discoPlayground > .levelAlert {
+				display: none;
+				position: absolute;
+				right: 4%;
+				top: calc(8% + 3.5em);
+				font-size: .8em;
+				font-weight: bolder;
+/*				border: 1px solid rgba(70,80,70,.78);*/
+				padding: .4em 2em;
+				color: rgba(80,256,42,.95);
+/*				border-radius: .4em;*/
+				filter: saturate(.625);
+			}
+			.discoPlayground > .levelAlertCentered {
+				display: block;
+				position: absolute;
+				left: 50%;
+				top: 25%;
+				transform: translate(-50%,-50%);
+				font-size: 1.2em;
+				font-weight: bolder;
+				color: white;
+				opacity: .8;
+			}
+			.discoPlayground > .fallingAlert {
+				position: absolute;
+				transform: translate(50%);
+				right: 50%;
+				top: 75%;
+				opacity: 0.70;
+				color: red;
+			}
+			.discoPlayground > .bonusAlert {
+				font-size: 1.5em;
+				text-shadow: 1px 1px 3px currentColor;
+				font-weight: bold;
+				text-align: center;
+				position: absolute;
+				transform: translate(50%);
+				right: 50%;
+				top: 55%;
+				opacity: 0.70;
+			}
+		</style>
+		<script>
+			function launchT() {
+				window.T = {}
+					T.LocalStorage = {}
+						T.LocalStorage.data = {}
+						window.LSD = T.LocalStorage.data	// LocalStorage Data
+						T.LocalStorage.write = {}
+							T.LocalStorage.write.x = _=>localStorage.setItem("T",JSON.stringify(LSD))
+							window.LSS = T.LocalStorage.write.x	// LocalStorage Save
+						T.LocalStorage.read = {}
+							T.LocalStorage.read.x = _=>{
+								if(!localStorage.T)
+									localStorage.T = '{}'
+								return LSD=JSON.parse(localStorage.getItem("T"))
+							}
+							window.LSR = T.LocalStorage.read.x	// LocalStorage ( OR Read Restore )
+							LSR()
+						if(!LSD.disco)
+							LSD.disco = {}
+					T.DOM = {}
+						T.DOM.main = {}
+							T.DOM.main.x = document.createElement('DIV')
+							window.main = T.DOM.main.x
+							main.classList = 'main'
+					T.utilities = {}
+						T.utilities.relativeRandomPath = {}
+							T.utilities.relativeRandomPath.generator = {}
+								T.utilities.relativeRandomPath.generator.x = (param={
+									"intervalNumberSteps": {"x": 5},
+									"minNumberSteps": {"x": 1},
+									"maxspeed": {
+										"positivex": {"x": 3},
+										"negativex": {"x": 3},
+										"positivey": {"x": 3},
+										"negativey": {"x": 3},
+									},
+									"maxMultVectorK": {"x": 6},
+									"preventStationary": {
+										"x": true,
+										"horizontal": {"x": false},
+										"vertical": {"x": false},
+									},
+								})=>{
+									if (param.intervalNumberSteps<0)
+										Error("intervalNumberSteps can't be less than 0")
+									let
+										posizioni = [],
+										distanze = []
+									for(let i=Math.floor(Math.random()*param.intervalNumberSteps.x)+param.minNumberSteps.x; i>0; i--) {
+										const randomp = Math.floor(Math.random()*(param.maxspeed.positivex.x+Math.abs(param.maxspeed.negativex.x)))-Math.abs(param.maxspeed.negativex.x)
+										const randomd = Math.floor(Math.random()*(param.maxspeed.positivey.x+Math.abs(param.maxspeed.negativey.x)))-Math.abs(param.maxspeed.negativey.x)
+										for (let g=Math.floor(Math.random()*param.maxMultVectorK.x); g>0; g--) {
+											posizioni.push(randomp)
+											distanze.push(randomd)
+										}
+									}
+									posizioni = tornaao(posizioni)
+									distanze = tornaao(distanze)
+									if(posizioni.length>distanze.length) {
+										for(let q=posizioni.length-distanze.length; q>0; q--)
+											distanze.push(0)
+									} else if(posizioni.length<distanze.length) {
+										for(let q=distanze.length-posizioni.length; q>0; q--)
+											posizioni.push(0)
+									}
+									let sommatoriaPosizioni = 0
+									let sommatoriaDistanze = 0
+									for (const j of posizioni){
+										sommatoriaPosizioni += Math.abs(j)
+									}
+									for (const j of distanze)
+										sommatoriaDistanze += Math.abs(j)
+									if (sommatoriaPosizioni==0 && param.preventStationary.horizontal.x){
+										let salvafermo = Math.floor(Math.random()*(param.maxspeed.positivex.x))+1
+										posizioni.push(salvafermo)
+										posizioni.push(-salvafermo)
+									}
+									if (sommatoriaDistanze==0 && param.preventStationary.vertical.x){
+										let salvafermo = Math.floor(Math.random()*(param.maxspeed.positivey.x))+1
+										distanze.push(salvafermo)
+										distanze.push(-salvafermo)
+									}
+									if (sommatoriaPosizioni==0 && sommatoriaDistanze==0 && param.preventStationary.x){
+										let salvafermo = Math.floor(Math.random()*(param.maxspeed.positivex.x))+1
+										posizioni.push(salvafermo)
+										posizioni.push(-salvafermo)
+										let salvafermoo = Math.floor(Math.random()*(param.maxspeed.positivey.x))+1
+										distanze.push(salvafermoo)
+										distanze.push(-salvafermoo)
+									}
+									return [posizioni,distanze]
+								}
+							T.utilities.relativeRandomPath.returntoorigin = {}
+								window.tornaao = (posizioni)=>{
+									let sommatoria = 0
+									for(let e=0; e<posizioni.length; e++)
+										sommatoria += posizioni[e]
+									if(sommatoria%3==0) {
+										for(let d=Math.abs(sommatoria/3); d>0; d--) {
+											if(sommatoria>0)
+												posizioni.push(-3)
+											else
+												posizioni.push(3)
+										}
+									} else if(sommatoria%2==0) {
+										for(let d=Math.abs(sommatoria/2); d>0; d--) {
+											if(sommatoria>0)
+												posizioni.push(-2)
+											else
+												posizioni.push(2)
+										}
+									} else {
+										for(let d=Math.abs(sommatoria); d>0; d--) {
+											if(sommatoria>0)
+												posizioni.push(-1)
+											else
+												posizioni.push(1)
+										}
+									}
+									posizioni.push(0)
+									return posizioni
+								}
+						T.utilities.cssCollision = {}
+							T.utilities.cssCollision.x = (elem1,elem2)=>{
+								const rect1 = elem1.getBoundingClientRect()
+								const rect2 = elem2.getBoundingClientRect()
+								return !(rect1.right<rect2.left||rect1.left>rect2.right||rect1.bottom<rect2.top||rect1.top>rect2.bottom)
+							}
+					T.disco = {}
+						T.disco.playerPreference = {}
+							T.disco.playerPreference.wantHome = {}
+								T.disco.playerPreference.wantHome.x = false
+						T.disco.functionPrototype = {}
+							T.disco.functionPrototype.defeat = {}
+								T.disco.functionPrototype.defeat.x = (playground)=>{
+									const bonusTimers = playground.entity.bonus.active.timer.x
+									for (const j of bonusTimers){
+										clearInterval(j)
+										const index = playground.entity.bonus.active.timer.x.indexOf(j)
+										if (index !== -1) {
+										    playground.entity.bonus.active.timer.x.splice(index, 1);
+										}
+									}
+									const bonusActive = playground.entity.bonus.active.x
+									for (const j of bonusActive){
+										j.type.finishFunction.x(undefined,j,playground)
+										const index = playground.entity.bonus.active.x.indexOf(j)
+										if (index !== -1) {
+										    playground.entity.bonus.active.x.splice(index, 1);
+										}
+									}
+									for(const j of playground.entity.bonus.pending.x)
+										clearInterval(j)
+									playground.entity.bonus.pending.x = []
+									const bonuses = [...playground.entity.bonus.x]
+									for(const j of bonuses)
+										T.disco.functionPrototype.removeEntity.x(playground,j,"bonus")
+									playground.level.history.x.push(playground.level.current.x=0)
+									playground.DOM.x.querySelector('.levelLastAlert').innerText = 'Last: '+playground.level.history.x[playground.level.history.x.length-2]
+									playground.DOM.x.querySelector('.levelAlert').innerText = 'Level: '+(playground.DOM.x.querySelector('.levelAlertCentered').innerText=playground.level.current.x)
+									const enemies = [...playground.entity.enemy.x]
+									for (const j of enemies)
+										T.disco.functionPrototype.removeEntity.x(playground,j,"enemy")
+								}
+							T.disco.functionPrototype.move = {}
+								T.disco.functionPrototype.move.x = (jJSON,moveRight = 0,moveTop = 0,limit = {
+										"maxTop": {"x" : -Infinity},
+										"maxBottom": {"x" : Infinity},
+										"maxRight": {"x" : -Infinity},
+										"maxLeft": {"x" : Infinity},
+									}, unit = "%", actuallyMove = true)=>{
+									const jDOM = jJSON.DOM.x
+									if ((jJSON.coord.X.x + moveRight)>limit.maxRight.x && (jJSON.coord.X.x + moveRight)<limit.maxLeft.x) 
+										jJSON.coord.X.x += moveRight
+									if ((jJSON.coord.Y.x + moveTop)>limit.maxTop.x && (jJSON.coord.Y.x + moveTop)<limit.maxBottom.x) 
+										jJSON.coord.Y.x += moveTop
+									if (actuallyMove) {
+										jJSON.DOM.x.style.left = jJSON.coord.X.x+"%"
+										jJSON.DOM.x.style.top = jJSON.coord.Y.x+"%"
+									}
+								}
+							T.disco.functionPrototype.addBonus = {}
+								T.disco.functionPrototype.addBonus.x =(obj,bonus,playground,maxBonuses)=>{
+									let canAdd = false
+									if (maxBonuses>playground.entity.bonus.active.x.length)
+										canAdd = true
+									if (canAdd) {
+										bonus.DOM.x.remove()
+										const brDOM = playground.DOM.bonus.indexOf(bonus.DOM)
+										playground.DOM.bonus.splice(brDOM,1)
+										const brJSON = playground.entity.bonus.x.indexOf(bonus)
+										playground.entity.bonus.x.splice(brJSON,1)
+										bonus.type.startinFunction.x(obj,bonus,playground)
+									}
+								}
+							T.disco.functionPrototype.removeEntity = {}
+								T.disco.functionPrototype.removeEntity.x =(playground,obj,type)=>{
+									obj.DOM.x.remove()
+									const br = playground.entity[type].x.indexOf(obj)
+										playground.entity[type].x.splice(br,1)
+									const brd = playground.DOM[type].indexOf(obj.DOM.x)
+										playground.DOM[type].splice(brd,1)
+								}
+							T.disco.functionPrototype.newEnemy = {}
+								T.disco.functionPrototype.newEnemy.x = (playground,enemiesNumber = 1)=>{
+										for (let n = enemiesNumber; n>0; n--)
+											T.disco.entity.enemy.new.place.x(playground)
+									}
+						T.disco.getPos = {}
+							T.disco.getPos.x = (coord,size,margin={
+								"left": {"x": 0},
+								"top": {"x": 0},
+								"right": {"x": 0},
+								"bottom": {"x": 0},
+							})=>{
+								if(coord==undefined)
+									coord = {
+										"X": {"x": 50},
+										"Y": {"x": 50},
+									}
+								return {
+									"X": {"x": coord.X.x},
+									"Y": {"x": coord.Y.x},
+								}
+							}
+							T.disco.getPos.X = {}
+								T.disco.getPos.X.x = (pos,size,marginLeft=0,marginRight=0)=>{
+									if(size==undefined)
+										return Error()
+									if(pos==undefined)
+										pos = Math.floor(size/2-1)
+									return ((pos+marginLeft+1)*2+1)/(size+marginLeft+marginRight)*50+'%'
+								}
+							T.disco.getPos.Y = {}
+								T.disco.getPos.Y.x = (pos,size,marginTop=0,marginBottom=0)=>{
+									if(size==undefined)
+										return Error()
+									if(pos==undefined)
+										pos = Math.floor(size/2-1)
+									return ((pos+marginTop+1)*2+1)/(size+marginTop+marginBottom)*50+'%'
+								}
+						T.disco.entity = {}
+							T.disco.entity.player = {}
+								T.disco.entity.player.body = {}
+									T.disco.entity.player.body.x = '^⬤^'
+								T.disco.entity.player.sideJump = {}
+									T.disco.entity.player.sideJump.x = 5
+								T.disco.entity.player.vertJump = {}
+									T.disco.entity.player.vertJump.x = 10
+								T.disco.entity.player.new = {}
+									T.disco.entity.player.new.x = _=>{
+										return {
+											
+											"coord": {
+												"X": {},
+												"Y": {},
+											},
+											"move": {
+												"sideJump" : {"x" : T.disco.entity.player.sideJump.x},
+												"vertJump" : {"x" : T.disco.entity.player.vertJump.x},
+												"fallSpeed": {
+													"x": 3,
+													"updateFrequency": {},
+												},
+											},
+											"DOM" : {},
+										}
+									}
+									T.disco.entity.player.new.DOM = {}
+										T.disco.entity.player.new.DOM.x = _=>{
+											const elem = document.createElement('DIV')
+											elem.classList = 'entity player'
+											elem.innerText = T.disco.entity.player.body.x
+											return {
+												"DOM": {"x": elem},
+											}
+										}
+									T.disco.entity.player.new.place = {}
+										T.disco.entity.player.new.place.x = (playground)=>{
+											if(playground==undefined)
+												return Error()
+											const elemJSON = T.disco.entity.player.new.x()
+											const elemDOM = T.disco.entity.player.new.DOM.x().DOM.x
+											elemDOM.style.left = "50%"
+											elemDOM.style.top = "50%"
+											elemJSON.coord.X.x = 50
+											elemJSON.coord.Y.x = 50
+											elemJSON.move.fallSpeed.updateFrequency.x = playground.size.updateFrequency.gravity.x
+											elemJSON.DOM.x = elemDOM
+											playground.entity.player.x.push(elemJSON)
+											playground.DOM.player.push(elemDOM)
+											playground.DOM.x.appendChild(elemDOM)
+											elemJSON.move.x = setInterval (_=>T.disco.functionPointer.meFallingAndMoving.x(elemJSON),elemJSON.move.fallSpeed.updateFrequency.x)
+										}
+							T.disco.entity.goal = {}
+								T.disco.entity.goal.body = {}
+									T.disco.entity.goal.body.x = '⬤'
+								T.disco.entity.goal.new = {}
+									T.disco.entity.goal.new.x = _=>{
+										return {
+											"coord": {
+												"X": {},
+												"Y": {},
+											},
+											"DOM" : {},
+										}
+									}
+									T.disco.entity.goal.new.DOM = {}
+										T.disco.entity.goal.new.DOM.x = _=>{
+											const elem = document.createElement('DIV')
+											elem.classList = 'entity goal'
+											elem.innerText = T.disco.entity.goal.body.x
+											return {
+												"DOM": {"x": elem},
+											}
+										}
+									T.disco.entity.goal.new.place = {}
+										T.disco.entity.goal.new.place.x = (playground)=>{
+											if(playground==undefined)
+												return Error()
+											const elemJSON = T.disco.entity.goal.new.x()
+											elemJSON.coord.X.x = (Math.floor(Math.random()*19)+1)*5 
+											elemJSON.coord.Y.x = (Math.floor(Math.random()*19)+1)*5
+											const elemDOM = T.disco.entity.goal.new.DOM.x().DOM.x
+											elemDOM.style.left = elemJSON.coord.X.x+"%"
+											elemDOM.style.top = elemJSON.coord.Y.x+"%"
+											elemJSON.DOM.x = elemDOM
+											playground.entity.goal.x.push(elemJSON)
+											playground.DOM.goal.push(elemDOM)
+											playground.DOM.x.appendChild(elemDOM)
+										}
+							T.disco.entity.enemy = {}
+								T.disco.entity.enemy.body = {}
+									T.disco.entity.enemy.body.x = '⬤'
+								T.disco.entity.enemy.new = {}
+									T.disco.entity.enemy.new.x = _=>{
+										return {
+											"coord": {
+												"X": {},
+												"Y": {},
+											},
+											"path": {
+												"chronos": {},
+												"phase": {},
+												"updateFrequency": {}
+											},
+											"DOM" : {},
+										}
+									}
+									T.disco.entity.enemy.new.DOM = {}
+										T.disco.entity.enemy.new.DOM.x = _=>{
+											const elem = document.createElement('DIV')
+											elem.classList = 'entity enemy'
+											elem.innerText = T.disco.entity.enemy.body.x
+											return {
+												"DOM": {"x": elem},
+											}
+										}
+									T.disco.entity.enemy.new.place = {}
+										T.disco.entity.enemy.new.place.x = (playground)=>{
+											if(playground==undefined)
+												return Error()
+											const elemJSON = T.disco.entity.enemy.new.x()
+											elemJSON.coord.X.x = (Math.floor(Math.random()*19)+1)*5 
+											elemJSON.coord.Y.x = (Math.floor(Math.random()*19)+1)*5
+											const elemDOM = T.disco.entity.enemy.new.DOM.x().DOM.x
+											if (elemJSON.coord.X.x == playground.entity.player.x[0].coord.X.x)
+												elemJSON.coord.X.x += 5
+											elemDOM.style.top = elemJSON.coord.Y.x + "%"
+											elemDOM.style.left = elemJSON.coord.X.x + "%"
+											elemJSON.DOM.x = elemDOM
+											elemJSON.path.x = T.utilities.relativeRandomPath.generator.x()
+											playground.entity.enemy.x.push(elemJSON)
+											playground.DOM.enemy.push(elemDOM)
+											playground.DOM.x.appendChild(elemDOM)
+											elemJSON.path.phase = {}
+												elemJSON.path.phase.x = 0
+											elemJSON.path.updateFrequency.x = playground.size.updateFrequency.enemy.x
+											elemJSON.path.chronos = {}
+												elemJSON.path.chronos.x = setInterval(_=> {
+													elemJSON.path.phase.x = (elemJSON.path.phase.x + 1) % (elemJSON.path.x[0].length)
+													T.disco.functionPointer.enemyPath.x(elemJSON)}, elemJSON.path.updateFrequency.x)
+												
+										}
+							T.disco.entity.bonus = {}
+								T.disco.entity.bonus.body = {}
+									T.disco.entity.bonus.body.x = '✭'
+								T.disco.entity.bonus.new = {}
+									T.disco.entity.bonus.new.x = _=>{
+										return {
+											"coord": {
+												"X": {},
+												"Y": {},
+											},
+											"duration": {
+												"visualTimer": {}
+											},
+											"type": {},
+											"DOM" : {},
+										}
+									}
+									T.disco.entity.bonus.new.DOM = {}
+										T.disco.entity.bonus.new.DOM.x = _=>{
+											const elem = document.createElement('DIV')
+											elem.classList = 'entity bonus'
+											elem.innerText = T.disco.entity.bonus.body.x
+											return {
+												"DOM": {"x": elem},
+											}
+										}
+									T.disco.entity.bonus.new.place = {}
+										T.disco.entity.bonus.new.place.x = (playground,type)=>{
+											if(playground==undefined)
+												return Error()
+											const elemJSON = T.disco.entity.bonus.new.x()
+											elemJSON.coord.X.x = (Math.floor(Math.random()*19)+1)*5
+											type = T.disco.entity.bonus.type.generate.x()
+											elemJSON.type = T.disco.entity.bonus.type[type]
+											
+											elemJSON.type.x = type
+											elemJSON.coord.Y.x = (Math.floor(Math.random()*19)+1)*5
+											elemJSON.duration.x = Math.floor(Math.random()*10000)+5000
+											const elemDOM = T.disco.entity.bonus.new.DOM.x().DOM.x
+											elemDOM.style.left = elemJSON.coord.X.x+"%"
+											elemDOM.style.top = elemJSON.coord.Y.x+"%"
+											elemDOM.style.color = "rgb(" + T.disco.entity.bonus.type[type].color.x.R.x + ", " + T.disco.entity.bonus.type[type].color.x.G.x +" ,"+ T.disco.entity.bonus.type[type].color.x.B.x + ")"
+											elemJSON.DOM.x = elemDOM
+											playground.entity.bonus.x.push(elemJSON)
+											playground.DOM.bonus.push(elemDOM)
+											playground.DOM.x.appendChild(elemDOM)
+										}
+								T.disco.entity.bonus.spawnCondition = {}
+									T.disco.entity.bonus.spawnCondition.rate = {"x": [.9,.03,.07,.87,.1,.15]}
+									T.disco.entity.bonus.spawnCondition.timing = {}
+										T.disco.entity.bonus.spawnCondition.timing.max = {"x": 8000}
+										T.disco.entity.bonus.spawnCondition.timing.min = {"x": 1500}
+								T.disco.entity.bonus.type = {}
+									T.disco.entity.bonus.type.throos = {}
+										T.disco.entity.bonus.type.throos.x = [
+											"invincible",  // famo che cambia anche il colore ad arancione
+											"fly",
+											"freeze",
+											"strong",
+											"double",
+											"parallax",
+											"again",  // fa comparire altri bonus, non ha durata (ti genera un numero di bonus che dipendono dal livello)
+											"shine",  // ingrgrandisce (di molto) il goal
+											"peaceful",  // Non fa comparire nemici quando prendi i goal
+											"gambling", //da scrivere
+											"wink",  // compare un bot che ti aiuta a prendere i goal; se muore fine, ma è comunque a tempo
+											// "MilkyWay",  // i bonus iniziano a girare per lo schermo, e puoi prenderne fino a 2
+											// "shootingStars", //cadono bonus dal cielo e si accumulano per il futuro
+											//"overpowered",  // puoi prendere fino a 7 effetti contemporaneamente (se passi sopra un bonus con effetto che già hai, rimane lì)
+										]
+									T.disco.entity.bonus.iterator = {}
+										T.disco.entity.bonus.iterator.x = (obj,bonus,playground,addText = "")=> {
+												const color = "rgb(" + bonus.type.color.x.R.x + ", " + bonus.type.color.x.G.x +" ,"+ bonus.type.color.x.B.x + ")"
+												let textTime = Math.floor (bonus.duration.x/1000)
+												T.disco.playground.bonusAlert.display.x(playground,bonus.type.x+addText+"<br>"+textTime,color);textTime--
+												const visualTimer = setInterval (_=> {T.disco.playground.bonusAlert.display.x(playground,bonus.type.x+addText+" <br> "+textTime,color);textTime--},1000)
+												bonus.duration.visualTimer.x = visualTimer
+												bonus.endTimer = setTimeout (_=>{bonus.type.finishFunction.x(obj,bonus,playground)},bonus.duration.x)
+												playground.entity.bonus.active.timer.x.push(bonus.endtTimer)
+												playground.entity.bonus.active.x.push(bonus)
+										}
+									T.disco.entity.bonus.stopper = {}
+										T.disco.entity.bonus.stopper.x =(obj,bonus,playground)=> {
+												T.disco.playground.bonusAlert.remove.x(playground)
+												clearInterval(bonus.duration.visualTimer.x)
+												const indexTimer = playground.entity.bonus.active.timer.x.indexOf(bonus.endtTimer)
+												if (indexTimer !== -1)
+    												playground.entity.bonus.active.timer.x.splice(indexTimer, 1);
+												clearTimeout(bonus.endTimer)
+												const br = playground.entity.bonus.active.x.indexOf(bonus)
+												playground.entity.bonus.active.x.splice(br,1)
+										}
+									T.disco.entity.bonus.type.invincible = {}
+										T.disco.entity.bonus.type.invincible.color = {}
+											T.disco.entity.bonus.type.invincible.color.x = {
+												"R": {"x": 202},
+												"G": {"x": 102},
+												"B": {"x": 25},
+											}
+										T.disco.entity.bonus.type.invincible.startinFunction = {}
+											T.disco.entity.bonus.type.invincible.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyCollision.x = _=>{}
+											}
+										T.disco.entity.bonus.type.invincible.finishFunction = {}
+											T.disco.entity.bonus.type.invincible.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyCollision.x = (obj,enemy,playground = T.disco.playground.throos.x.main) => T.disco.functionPrototype.defeat.x (playground)
+											}
+										T.disco.entity.bonus.type.invincible.description = {}
+											T.disco.entity.bonus.type.invincible.description.x = 'non è vincible'
+									T.disco.entity.bonus.type.fly = {}
+										T.disco.entity.bonus.type.fly.color = {}
+											T.disco.entity.bonus.type.fly.color.x = {
+												"R": {"x": 175},
+												"G": {"x": 175},
+												"B": {"x": 25},
+											}
+										T.disco.entity.bonus.type.fly.startinFunction = {}
+											T.disco.entity.bonus.type.fly.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.functionPointer.leftArrow.x = (obj,param = T.disco.standardValue.leftJump.fly.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.rightArrow.x = (obj,param = T.disco.standardValue.rightJump.fly.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.downArrow.x = (obj,param = T.disco.standardValue.downJump.fly.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.upArrow.x = (obj,param = T.disco.standardValue.upJump.fly.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.meFallingAndMoving.x = (obj,param = T.disco.standardValue.fall.fly.x(obj)) => T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPrototype.move.x(obj,0,(obj.coord.Y.x%5))
+											}
+										T.disco.entity.bonus.type.fly.finishFunction = {}
+											T.disco.entity.bonus.type.fly.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												T.disco.functionPointer.leftArrow.x = (obj,param = T.disco.standardValue.leftJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.rightArrow.x = (obj,param = T.disco.standardValue.rightJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.downArrow.x = (obj,param = T.disco.standardValue.downJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.upArrow.x = (obj,param = T.disco.standardValue.downJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+												T.disco.functionPointer.meFallingAndMoving.x = (obj,param = T.disco.standardValue.fall.normal.x(obj)) => T.disco.functionPrototype.move.x(obj,...Object.values(param))
+										}
+										T.disco.entity.bonus.type.fly.description = {}
+											T.disco.entity.bonus.type.fly.description.x = 'vola'
+									T.disco.entity.bonus.type.freeze = {}
+										T.disco.entity.bonus.type.freeze.color = {}
+											T.disco.entity.bonus.type.freeze.color.x = {
+												"R": {"x": 60},
+												"G": {"x": 60},
+												"B": {"x": 230},
+											}
+										T.disco.entity.bonus.type.freeze.startinFunction = {}
+											T.disco.entity.bonus.type.freeze.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyPath.x = _=> {}
+											}
+										T.disco.entity.bonus.type.freeze.finishFunction = {}
+											T.disco.entity.bonus.type.freeze.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyPath.x = (obj, param = T.disco.standardValue.enemyPath.normal.x(obj)) => T.disco.functionPrototype.move.x (obj,...Object.values(param))
+											}
+										T.disco.entity.bonus.type.freeze.description = {}
+											T.disco.entity.bonus.type.freeze.description.x = 'daje'
+									T.disco.entity.bonus.type.strong = {}
+										T.disco.entity.bonus.type.strong.color = {}
+											T.disco.entity.bonus.type.strong.color.x = {
+												"R": {"x": 255},
+												"G": {"x": 10},
+												"B": {"x": 30},
+											}
+										T.disco.entity.bonus.type.strong.startinFunction = {}
+											T.disco.entity.bonus.type.strong.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyCollision.x = (obj,enemy,playground = T.disco.playground.throos.x.main)=> {
+													T.disco.functionPrototype.removeEntity.x(playground,enemy,"enemy")
+													T.disco.entity.bonus.type.strong.finishFunction.x(obj,bonus,playground)
+												}
+											}
+										T.disco.entity.bonus.type.strong.finishFunction = {}
+											T.disco.entity.bonus.type.strong.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												T.disco.functionPointer.enemyCollision.x = (obj,enemy,playground = T.disco.playground.throos.x.main)=> T.disco.functionPrototype.defeat.x (playground)
+											}
+										T.disco.entity.bonus.type.strong.description = {}
+											T.disco.entity.bonus.type.strong.description.x = 'sai, quand\'haiffame'
+									T.disco.entity.bonus.type.double = {}
+										T.disco.entity.bonus.type.double.color = {}
+											T.disco.entity.bonus.type.double.color.x = {
+												"R": {"x": 20},
+												"G": {"x": 250},
+												"B": {"x": 30},
+											}
+										T.disco.entity.bonus.type.double.startinFunction = {}
+											T.disco.entity.bonus.type.double.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.entity.goal.new.place.x(playground)
+											}
+										T.disco.entity.bonus.type.double.finishFunction = {}
+											T.disco.entity.bonus.type.double.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												const goals = playground.entity.goal.x
+												while (goals.length>1)
+													T.disco.functionPrototype.removeEntity.x(playground,goals[1],"goal")
+											}
+										T.disco.entity.bonus.type.double.description = {}
+											T.disco.entity.bonus.type.double.description.x = 'hai due punti verdi'
+									T.disco.entity.bonus.type.parallax = {}
+										T.disco.entity.bonus.type.parallax.color = {}
+											T.disco.entity.bonus.type.parallax.color.x = {
+												"R": {"x": 255},
+												"G": {"x": 140},
+												"B": {"x": 140},
+											}
+										T.disco.entity.bonus.type.parallax.startinFunction = {}
+											T.disco.entity.bonus.type.parallax.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												for (const j of playground.entity.enemy.x)
+													T.disco.functionPrototype.move.x(j,2.5)
+												T.disco.functionPointer.newEnemy.x = (playground,enemiesNumber = 1)=>{
+													id = playground.entity.enemy.x.length
+													T.disco.functionPrototype.newEnemy.x(playground,enemiesNumber = 1)
+													T.disco.functionPrototype.move.x(playground.entity.enemy.x[id],2.5)
+												}
+												var stylesheet = document.getElementById("enemy").sheet
+												stylesheet.cssRules[0].style.transition = "100ms"
+												stylesheet.cssRules[0].style.transitionTimingFunction = "linear"
+											}
+										T.disco.entity.bonus.type.parallax.finishFunction = {}
+											T.disco.entity.bonus.type.parallax.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												for (const j of playground.entity.enemy.x)
+													T.disco.functionPrototype.move.x(j,-2.5)
+													T.disco.functionPointer.newEnemy.x = (playground,enemiesNumber = 1)=>{T.disco.functionPrototype.newEnemy.x(playground,enemiesNumber = 1)
+												}
+												var stylesheet = document.getElementById("enemy").sheet
+												stylesheet.cssRules[0].style.transition = "600ms"
+												stylesheet.cssRules[0].style.transitionTimingFunction = "linear"
+											}
+										T.disco.entity.bonus.type.parallax.description = {}
+											T.disco.entity.bonus.type.parallax.description.x = 'rimpicciolisce i nemici (solo)'
+									T.disco.entity.bonus.type.again = {}
+										T.disco.entity.bonus.type.again.color = {}
+											T.disco.entity.bonus.type.again.color.x = {
+												"R": {"x": 220},
+												"G": {"x": 51},
+												"B": {"x": 150},
+											}
+										T.disco.entity.bonus.type.again.startinFunction = {}
+											T.disco.entity.bonus.type.again.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.type.again.getAmount.value = T.disco.entity.bonus.type.again.getAmount.x(playground.level.current.x)
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground,"  "+T.disco.entity.bonus.type.again.getAmount.value)
+											}
+										T.disco.entity.bonus.type.again.getAmount = {}
+											T.disco.entity.bonus.type.again.getAmount.x = (n,base = 1.5)=>{
+												let res = Math.log(n+1) / Math.log(base)
+												return Math.floor(res)
+											}
+										// T.disco.entity.bonus.type.again.getAmount = {}
+										// 	T.disco.entity.bonus.type.again.getAmount.x = n=>{
+										// 		if(isNaN(n))
+										// 			return Error()
+										// 		return Math.floor(
+										// 			Math.pow(
+										// 				Math.pow(
+										// 					n,
+										// 					(2/Math.E)**2,
+										// 				)+Math.pow(
+										// 					Math.E,
+										// 					-n,
+										// 				)+Math.E+n*(
+										// 					(
+										// 						1/(
+										// 							1+Math.pow(
+										// 								Math.E,
+										// 								35-n,
+										// 							)
+										// 						)+1/(
+										// 							1+Math.pow(
+										// 								Math.E,
+										// 								70-n,
+										// 							)
+										// 						)
+										// 					)/Math.E**2-1/(
+										// 						Math.pow(
+										// 							Math.E,
+										// 							Math.E,
+										// 						)*(
+										// 							1+Math.pow(
+										// 								Math.E,
+										// 								9-n,
+										// 							)
+										// 						)
+										// 					)
+										// 				),
+										// 				2/Math.E,
+										// 			),
+										// 		)
+										// 	}
+										T.disco.entity.bonus.type.again.finishFunction = {}
+											T.disco.entity.bonus.type.again.finishFunction.x = (obj,bonus,playground)=> {
+												for (let i = T.disco.entity.bonus.type.again.getAmount.value; i>0; i--)
+													T.disco.entity.bonus.new.place.x(playground)
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+											}
+										T.disco.entity.bonus.type.again.description = {}
+											T.disco.entity.bonus.type.again.description.x = 'daje'
+									T.disco.entity.bonus.type.shine = {}
+										T.disco.entity.bonus.type.shine.color = {}
+											T.disco.entity.bonus.type.shine.color.x = {
+												"R": {"x": 255},
+												"G": {"x": 255},
+												"B": {"x": 255},
+											}
+										T.disco.entity.bonus.type.shine.startinFunction = {}
+											T.disco.entity.bonus.type.shine.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+													var stylesheet = document.getElementById("goals").sheet;
+													stylesheet.cssRules[0].style.fontSize = "4em";
+													stylesheet.cssRules[0].style.textShadow = "0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00"
+											}
+										T.disco.entity.bonus.type.shine.finishFunction = {}
+											T.disco.entity.bonus.type.shine.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+													var stylesheet = document.getElementById("goals").sheet;
+													stylesheet.cssRules[0].style.fontSize = ".5em";
+													stylesheet.cssRules[0].style.textShadow = "0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00, 0 0 45px #00ff00, 0 0 50px #00ff00, 0 0 60px #00ff00, 0 0 70px #00ff00"
+											}
+										T.disco.entity.bonus.type.shine.description = {}
+											T.disco.entity.bonus.type.shine.description.x = 'ingrgrandisce (di molto) il goal'
+									T.disco.entity.bonus.type.peaceful = {}
+										T.disco.entity.bonus.type.peaceful.color = {}
+											T.disco.entity.bonus.type.peaceful.color.x = {
+												"R": {"x": 127},
+												"G": {"x": 220},
+												"B": {"x": 127},
+											}
+										T.disco.entity.bonus.type.peaceful.startinFunction = {}
+											T.disco.entity.bonus.type.peaceful.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.functionPointer.newEnemy.x = (playground,enemiesNumber = 1)=>{T.disco.functionPrototype.newEnemy.x(playground,enemiesNumber = 0)}
+											}
+										T.disco.entity.bonus.type.peaceful.finishFunction = {}
+											T.disco.entity.bonus.type.peaceful.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												T.disco.functionPointer.newEnemy.x = (playground,enemiesNumber = 1)=>{T.disco.functionPrototype.newEnemy.x(playground,enemiesNumber = 1)}
+											}
+										T.disco.entity.bonus.type.peaceful.description = {}
+											T.disco.entity.bonus.type.peaceful.description.x = '?'
+									T.disco.entity.bonus.type.gambling = {}
+										T.disco.entity.bonus.type.gambling.color = {}
+											T.disco.entity.bonus.type.gambling.color.x = {
+												"R": {"x": 120},
+												"G": {"x": 140},
+												"B": {"x": 130},
+											}
+										T.disco.entity.bonus.type.gambling.startinFunction = {}
+											T.disco.entity.bonus.type.gambling.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.type.gambling.getAmount.value = T.disco.entity.bonus.type.gambling.getAmount.x(playground.level.current.x)
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground,"  "+T.disco.entity.bonus.type.gambling.getAmount.value)
+											}
+										T.disco.entity.bonus.type.gambling.getAmount = {}
+											T.disco.entity.bonus.type.gambling.getAmount.x = (lvl)=>{
+												const x = Math.random()
+												const exponent = 1 - 10 * (x - .25);
+											    const expPart = Math.exp(exponent);
+											    let result = Math.floor(((2 / (1 + expPart)) - 1 + (x / 8))*5)
+											    if (lvl<Math.abs(result)&&result<0)
+											    	result = -lvl
+											    return result;
+											}
+										T.disco.entity.bonus.type.gambling.finishFunction = {}
+											T.disco.entity.bonus.type.gambling.finishFunction.x = (obj,bonus,playground)=> {
+												T.disco.functionPointer.goalCollision.x(undefined,playground,T.disco.entity.bonus.type.gambling.getAmount.value,0)
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+											}
+										T.disco.entity.bonus.type.gambling.description = {}
+											T.disco.entity.bonus.type.gambling.description.x = 'daje'
+									T.disco.entity.bonus.type.wink = {}
+										T.disco.entity.bonus.type.wink.color = {}
+											T.disco.entity.bonus.type.wink.color.x = {
+												"R": {"x": 0},
+												"G": {"x": 150},
+												"B": {"x": 100},
+											}
+										T.disco.entity.bonus.type.wink.startinFunction = {}
+											T.disco.entity.bonus.type.wink.startinFunction.x = (obj,bonus,playground)=> {
+												T.disco.entity.bonus.iterator.x(obj,bonus,playground)
+												T.disco.entity.bonus.type.wink.id = playground.entity.player.x.length
+												const goalid = Math.floor(Math.random()*playground.entity.goal.x.length)
+												T.disco.entity.player.new.place.x(playground)
+												T.disco.entity.bonus.type.wink.timingBot = setInterval(()=>T.disco.functionPointer.botPlayerMoove.x(playground.entity.player.x[T.disco.entity.bonus.type.wink.id],playground.entity.goal.x[goalid]),300)
+												T.disco.functionPointer.enemyCollision.x = (stupid,enemy,playground)=> T.disco.entity.bonus.type.wink.finishFunction.x(obj,bonus,playground,stupid) 
+											}
+										T.disco.entity.bonus.type.wink.finishFunction = {}
+											T.disco.entity.bonus.type.wink.finishFunction.x = (obj,bonus,playground,stupid = playground.entity.player.x[T.disco.entity.bonus.type.wink.id])=> {
+												T.disco.entity.bonus.stopper.x(obj,bonus,playground)
+												clearInterval(T.disco.entity.bonus.type.wink.timingBot)
+												T.disco.functionPrototype.removeEntity.x(playground,stupid,"player")
+												T.disco.functionPointer.enemyCollision.x = (obj,enemy,playground) => T.disco.functionPrototype.defeat.x(playground)
+											}
+										T.disco.entity.bonus.type.wink.description = {}
+											T.disco.entity.bonus.type.wink.description.x = 'compare un bot che ti aiuta a prendere i goal; se muore fine, ma è comunque a tempo'
+									T.disco.entity.bonus.type.MilkyWay = {}
+										T.disco.entity.bonus.type.MilkyWay.color = {}
+											T.disco.entity.bonus.type.MilkyWay.color.x = {
+												"R": {"x": 65},
+												"G": {"x": 255},
+												"B": {"x": 177},
+											}
+										T.disco.entity.bonus.type.MilkyWay.description = {}
+											T.disco.entity.bonus.type.MilkyWay.description.x = 'i bonus iniziano a girare per lo schermo, e puoi prenderne fino a 2'
+									T.disco.entity.bonus.type.shootingStars = {}
+										T.disco.entity.bonus.type.shootingStars.color = {}
+											T.disco.entity.bonus.type.shootingStars.color.x = {
+												"R": {"x": 255},
+												"G": {"x": 125},
+												"B": {"x": 255},
+											}
+										T.disco.entity.bonus.type.shootingStars.description = {}
+											T.disco.entity.bonus.type.shootingStars.description.x = 'cadono bonus dal cielo e si accumulano per il futuro'
+									T.disco.entity.bonus.type.overpowered = {}
+										T.disco.entity.bonus.type.overpowered.color = {}
+											T.disco.entity.bonus.type.overpowered.color.x = {
+												"rainbow": {"x": true},
+											}
+										T.disco.entity.bonus.type.overpowered.description = {}
+											T.disco.entity.bonus.type.overpowered.description.x = 'puoi prendere fino a 7 effetti contemporaneamente (se passi sopra un bonus con effetto che già hai, rimane lì)'
+									T.disco.entity.bonus.type.generate = {}
+										T.disco.entity.bonus.type.generate.x = _=>T.disco.entity.bonus.type.throos.x[Math.floor(Math.random()*T.disco.entity.bonus.type.throos.x.length)]
+						T.DOM.disco = {}
+							T.DOM.disco.x = document.createElement('DIV')
+								T.DOM.disco.x.classList = 'disco'
+							T.DOM.disco.background = {}
+								T.DOM.disco.background.x = document.createElement('DIV')
+									T.DOM.disco.background.x.classList = 'background'
+									T.DOM.disco.x.appendChild(T.DOM.disco.background.x)
+								T.DOM.disco.background.image = {}
+									T.DOM.disco.background.image.x = document.createElement('DIV')
+										T.DOM.disco.background.image.x.classList = 'image'
+										T.DOM.disco.background.x.appendChild(T.DOM.disco.background.image.x)
+							T.DOM.disco.pageArea = {}
+								T.DOM.disco.pageArea.x = document.createElement('DIV')
+									T.DOM.disco.pageArea.x.classList = 'pageArea'
+						T.disco.playground = {}
+							T.disco.playground.throos = {}
+								T.disco.playground.throos.x = {}
+							T.disco.playground.new = {}
+								T.disco.playground.new.x = (name)=>{
+									if(name==undefined||T.disco.playground.throos.x[name]!=undefined)
+										for(let i=0; ; i++)
+											if(T.disco.playground.throos.x[i]==undefined)
+												name = i
+									T.disco.playground.throos.x[name] = {
+										"name": {"x": name},
+										"entity": {
+											"player": {"x": []},
+											"goal": {"x": []},
+											"enemy": {"x": []},
+											"bonus": {
+												"x": [],
+												"active": {
+													"x": [],
+													"timer": {"x" : []},
+												},
+												"pending": {"x": []},
+											},
+										},
+										"size": {
+											"width": {"x": 35},
+											"height": {"x": 35},
+											"updateFrequency": {
+												"collision": {"x": 5},
+												"enemy": {"x": 500},
+												"gravity": {"x": 120},
+											},
+											"margin": {
+												"left": {"x": 0},
+												"top": {"x": undefined},
+												"right": {"x": 0},
+												"bottom": {"x": undefined},
+											},
+										},
+										"level": {
+											"current": {},
+											"history": {"x": []},
+											"record": {},
+										},
+										"collisionIterator": {},
+										"DOM": {
+											"player": [],
+											"goal": [],
+											"enemy": [],
+											"bonus": [],
+										},
+									}
+									return {
+										"x": T.disco.playground.throos.x[name],
+										"name": {
+											"x": name,
+										},
+									}
+								}
+							T.DOM.disco.playgroundThroos = {}
+								T.DOM.disco.playgroundThroos.x = {}
+							T.disco.playground.launch = {}
+								T.disco.playground.launch.x = (playground)=>{
+									if(playground==undefined)
+										return Error()
+									const ID = playground.name.x
+									T.DOM.disco.playgroundThroos.x[ID] = document.createElement('DIV')
+									const elem = T.DOM.disco.playgroundThroos.x[ID]
+									playground.DOM.x = elem
+									elem.classList = 'discoPlayground'
+									elem.style.display = 'block'
+									elem.style.position = 'absolute'
+									elem.setAttribute('tabindex',0)
+									const handlekeys = (aaaa)=>{
+										switch(aaaa.key) {
+											case 'ArrowLeft':
+												T.disco.functionPointer.leftArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												T.disco.playerPreference.wantHome.x = false
+												break
+											case 'ArrowRight':
+												T.disco.functionPointer.rightArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												T.disco.playerPreference.wantHome.x = false
+												break
+											case 'ArrowDown':
+												T.disco.functionPointer.downArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												T.disco.playerPreference.wantHome.x = false
+												break
+											case 'ArrowUp':
+												T.disco.functionPointer.upArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												T.disco.playerPreference.wantHome.x = false
+												break
+											case 'h':
+												if (T.disco.playerPreference.wantHome.x) {
+													T.disco.functionPrototype.defeat.x(playground)
+													launchT()
+													document.body.appendChild(main)
+													T.disco.launch.x()
+													elem.removeEventListener('keydown',handlekeys)
+													T.disco.playerPreference.wantHome.x = false
+												}
+												T.disco.playerPreference.wantHome.x = true
+												break
+											case 'H':
+												if (T.disco.playerPreference.wantHome.x) {
+													T.disco.functionPrototype.defeat.x(playground)
+													launchT()
+													document.body.appendChild(main)
+													T.disco.launch.x()
+													elem.removeEventListener('keydown',handlekeys)
+													T.disco.playerPreference.wantHome.x = false
+												}
+												T.disco.playerPreference.wantHome.x = true
+												break
+											default:
+												T.disco.playerPreference.wantHome.x = false
+												break
+										}
+									}
+									elem.addEventListener('keydown',handlekeys)
+									setTimeout(_=>elem.focus(),0)
+									if (!('ontouchstart'in window||Boolean(navigator.maxTouchPoints)||Boolean(navigator.msMaxTouchPoints))) {
+										function handleTouch(event) {
+								            event.preventDefault();  // Previene comportamenti predefiniti come lo zoom
+								            const touches = event.touches;
+								            // Itera su ciascun tocco attivo
+								            for (let i = 0; i < touches.length; i++) {
+								                const touch = touches[i];
+								                const x = touch.clientX
+								                const y = touch.clientY
+								                if(y<elem.offsetHeight/7)
+													T.disco.functionPointer.upArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												else if(y>elem.offsetHeight*6/7)
+													T.disco.functionPointer.downArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												else if(x>elem.offsetWidth/2)
+													T.disco.functionPointer.rightArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+												else if(x<elem.offsetWidth/2)
+													T.disco.functionPointer.leftArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+								            }
+								        }
+									}
+									else {
+								        document.addEventListener('touchstart', handleTouch);
+								        elem.addEventListener('click', e=>{
+											const x = event.clientX
+											const y = event.clientY
+											if(y<elem.offsetHeight/5)
+												T.disco.functionPointer.upArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+											else if(y>elem.offsetHeight*4/5)
+												T.disco.functionPointer.downArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+											else if(x>elem.offsetWidth/2)
+												T.disco.functionPointer.rightArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+											else if(x<elem.offsetWidth/2)
+												T.disco.functionPointer.leftArrow.x(T.disco.playground.throos.x.main.entity.player.x[0])
+										})
+									}
+									const recordDOM = document.createElement('DIV')
+									recordDOM.classList = 'recordAlert'
+									recordDOM.innerText = 'Local record: '+T.disco.record.x
+									elem.appendChild(recordDOM)
+									const recordPlaygroundDOM = document.createElement('DIV')
+									recordPlaygroundDOM.classList = 'recordPlaygroundAlert'
+									recordPlaygroundDOM.innerText = 'Session record: '+(playground.level.record.x=0)
+									elem.appendChild(recordPlaygroundDOM)
+									const levelLastDOM = document.createElement('DIV')
+									levelLastDOM.classList = 'levelLastAlert'
+									levelLastDOM.innerText = 'Last: '+(playground.level.history.x[playground.level.history.x.length-1]||0)
+									elem.appendChild(levelLastDOM)
+									playground.level.history.x.push(playground.level.current.x=0)
+									const levelCurrentDOM = document.createElement('DIV')
+									levelCurrentDOM.classList = 'levelAlert'
+									elem.appendChild(levelCurrentDOM)
+									const levelCurrentCenteredDOM = document.createElement('DIV')
+									levelCurrentCenteredDOM.classList = 'levelAlertCentered'
+									elem.appendChild(levelCurrentCenteredDOM)
+									levelCurrentDOM.innerText = 'Level: '+(levelCurrentCenteredDOM.innerText=playground.level.current.x)
+									T.disco.entity.player.new.place.x(playground)
+									T.disco.entity.goal.new.place.x(playground)
+									playground.collisionIterator.x = setInterval(T.disco.playground.collisionCheck.x,playground.size.updateFrequency.collision.x,playground)
+									return {"x": elem}
+								}
+							T.disco.playground.collisionCheck = {}
+								T.disco.playground.collisionCheck.x = (playground)=>{
+									if(playground==undefined)
+										return Error()
+									for(const j of playground.entity.player.x) {
+										if(j.coord.Y.x>=100)
+											T.disco.playground.fallingAlert.display.x(playground)
+										else
+											T.disco.playground.fallingAlert.remove.x(playground)
+										if(j.coord.Y.x>150) {
+											playground.DOM.x.querySelector('.levelAlert').innerText = 'Level: '+(playground.DOM.x.querySelector('.levelAlertCentered').innerText=playground.level.current.x=0)
+											j.coord = {
+												"X": {"x": 50},
+												"Y": {"x": 50},
+											}
+											T.disco.functionPrototype.defeat.x(playground)
+										}
+										for(const j1 of playground.entity.goal.x)
+											if(T.utilities.cssCollision.x(j1.DOM.x,j.DOM.x)) {
+												T.disco.functionPointer.goalCollision.x(j1,playground)
+											}
+										for (const j1 of playground.entity.enemy.x)
+											if (T.utilities.cssCollision.x(j1.DOM.x,j.DOM.x))
+												T.disco.functionPointer.enemyCollision.x(j,j1,playground)
+										for (const j1 of playground.entity.bonus.x)
+											if (T.utilities.cssCollision.x(j1.DOM.x,j.DOM.x))
+												T.disco.functionPointer.bonusCollision.x(j,j1,playground)
+									}
+								}
+							T.disco.playground.fallingAlert = {}
+								T.disco.playground.fallingAlert.display = {}
+									T.disco.playground.fallingAlert.display.x = (playground)=>{
+										if(playground==undefined)
+											return Error()
+										if(playground.DOM.x.querySelector('.fallingAlert'))
+											return
+										const elemDOM = document.createElement('DIV')
+										elemDOM.classList = 'fallingAlert'
+										elemDOM.innerText = "you are falling down!!"
+										playground.DOM.x.appendChild(elemDOM)
+									}
+								T.disco.playground.fallingAlert.remove = {}
+									T.disco.playground.fallingAlert.remove.x = (playground)=>{
+										if(playground==undefined)
+											return Error()
+										if(playground.DOM.x.querySelector('.fallingAlert'))
+											playground.DOM.x.querySelector('.fallingAlert').outerHTML = ''
+									}
+							T.disco.playground.bonusAlert = {}
+								T.disco.playground.bonusAlert.display = {}
+									T.disco.playground.bonusAlert.display.x = (playground,text,color)=>{
+										if(playground==undefined)
+											return Error()
+										if(playground.DOM.x.querySelector('.bonusAlert')){
+											const elemDOM = playground.DOM.x.querySelector('.bonusAlert')
+											elemDOM.innerHTML = text
+											if (color)
+												elemDOM.style.color = color
+										} else {
+										const elemDOM = document.createElement('DIV')
+										elemDOM.classList = 'bonusAlert'
+										elemDOM.innerHTML = text
+										playground.DOM.x.appendChild(elemDOM)
+										if (color)
+												elemDOM.style.color = color
+										}
+									}
+								T.disco.playground.bonusAlert.remove = {}
+									T.disco.playground.bonusAlert.remove.x = (playground)=>{
+										if(playground==undefined)
+											return Error()
+										if(playground.DOM.x.querySelector('.bonusAlert'))
+											playground.DOM.x.querySelector('.bonusAlert').outerHTML = ''
+									}
+						T.disco.functionPointer = {}
+							T.disco.functionPointer.leftArrow = {}
+								T.disco.functionPointer.leftArrow.x = (obj,param = T.disco.standardValue.leftJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+							T.disco.functionPointer.rightArrow = {}
+								T.disco.functionPointer.rightArrow.x = (obj,param = T.disco.standardValue.rightJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+							T.disco.functionPointer.downArrow = {}
+								T.disco.functionPointer.downArrow.x = (obj,param = T.disco.standardValue.downJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+							T.disco.functionPointer.upArrow = {}
+								T.disco.functionPointer.upArrow.x = (obj,param = T.disco.standardValue.upJump.normal.x(obj))=> T.disco.functionPrototype.move.x(obj,...Object.values(param))
+							T.disco.functionPointer.meFallingAndMoving = {}
+								T.disco.functionPointer.meFallingAndMoving.x = (obj,param = T.disco.standardValue.fall.normal.x(obj)) => T.disco.functionPrototype.move.x(obj,...Object.values(param))
+							T.disco.functionPointer.enemyCollision = {}
+								T.disco.functionPointer.enemyCollision.x = (obj,enemy,playground = T.disco.playground.throos.x.main) => T.disco.functionPrototype.defeat.x (playground)
+							T.disco.functionPointer.bonusCollision = {}
+								T.disco.functionPointer.bonusCollision.x = (obj,bonus,playground = T.disco.playground.throos.x.main, param = T.disco.standardValue.bonusCollision.normal.x()) => T.disco.functionPrototype.addBonus.x (obj,bonus,playground,...Object.values(param))
+							T.disco.functionPointer.enemyPath = {}
+								T.disco.functionPointer.enemyPath.x = (obj, param = T.disco.standardValue.enemyPath.normal.x(obj)) => T.disco.functionPrototype.move.x (obj,...Object.values(param))
+							T.disco.functionPointer.newEnemy = {}
+								T.disco.functionPointer.newEnemy.x = (playground,enemiesNumber = 1)=>{T.disco.functionPrototype.newEnemy.x(playground,enemiesNumber = 1)}
+							T.disco.functionPointer.goalCollision = {}
+								T.disco.functionPointer.goalCollision.x = (j1,playground,levelincrement=1,newEnemies=1)=>{
+									if (j1) {
+										T.disco.functionPrototype.removeEntity.x(playground,j1,"goal")
+										T.disco.entity.goal.new.place.x(playground)
+									}
+									T.disco.functionPointer.newEnemy.x(playground,newEnemies)
+									playground.DOM.x.querySelector('.levelAlert').innerText = 'Level: '+(playground.DOM.x.querySelector('.levelAlertCentered').innerText=(playground.level.current.x+=levelincrement))
+									playground.DOM.x.querySelector('.recordPlaygroundAlert').innerText = 'Record: '+(
+										playground.level.record.x = Math.max(playground.level.record.x,++playground.level.history.x[playground.level.history.x.length-1])||0
+									)
+									if(playground.level.current.x>T.disco.record.x) {
+										playground.DOM.x.querySelector('.recordAlert').innerText = 'Record: '+(T.disco.record.x=playground.level.current.x)
+										LSS()
+									}
+									if(Math.random()<T.disco.entity.bonus.spawnCondition.rate.x[playground.level.current.x%T.disco.entity.bonus.spawnCondition.rate.x.length])
+										playground.entity.bonus.pending.x.push(setTimeout (_=>T.disco.entity.bonus.new.place.x(playground),Math.random()*(T.disco.entity.bonus.spawnCondition.timing.max.x-T.disco.entity.bonus.spawnCondition.timing.min.x)+T.disco.entity.bonus.spawnCondition.timing.min.x))
+								}
+							T.disco.functionPointer.botPlayerMoove = {}
+								T.disco.functionPointer.botPlayerMoove.x = (bot,goal)=>{
+									if (bot.coord.X.x<goal.coord.X.x)
+										T.disco.functionPrototype.move.x(bot,...Object.values(T.disco.standardValue.rightJump.normal.x(bot)))
+									else if (bot.coord.X.x>goal.coord.X.x)
+										T.disco.functionPrototype.move.x(bot,...Object.values(T.disco.standardValue.leftJump.normal.x(bot)))
+									else if (bot.coord.Y.x>goal.coord.Y.x){
+										T.disco.functionPrototype.move.x(bot,...Object.values(T.disco.standardValue.leftJump.normal.x(bot)))
+										T.disco.functionPrototype.move.x(bot,...Object.values(T.disco.standardValue.rightJump.normal.x(bot)))
+									}
+									else if (bot.coord.Y.x>goal.coord.Y.x)
+										T.disco.functionPrototype.move.x(bot,...Object.values(T.disco.standardValue.downJump.normal.x(bot)))
+								}
+						T.disco.standardValue = {}
+							T.disco.standardValue.leftJump = {}
+								T.disco.standardValue.leftJump.normal = {}
+									T.disco.standardValue.leftJump.normal.x = (obj) => {
+										values = {
+											"moveRight": -obj.move.sideJump.x,
+											"moveTop": -obj.move.vertJump.x,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x": 100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+							T.disco.standardValue.leftJump.fly = {}
+									T.disco.standardValue.leftJump.fly.x = (obj) => {
+										values = {
+											"moveRight": -obj.move.sideJump.x,
+											"moveTop": 0,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x": 100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+							T.disco.standardValue.rightJump = {}
+								T.disco.standardValue.rightJump.normal = {}
+									T.disco.standardValue.rightJump.normal.x = (obj) => {
+										values = {
+											"moveRight": obj.move.sideJump.x,
+											"moveTop": -obj.move.vertJump.x,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x":100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+								T.disco.standardValue.rightJump.fly = {}
+									T.disco.standardValue.rightJump.fly.x = (obj) => {
+										values = {
+											"moveRight": obj.move.sideJump.x,
+											"moveTop": 0,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x":100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+							T.disco.standardValue.downJump = {}
+								T.disco.standardValue.downJump.normal = {}
+									T.disco.standardValue.downJump.normal.x = (obj) => {
+										values = {
+											"moveRight": 0,
+											"moveTop": obj.move.vertJump.x/8,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x": 100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+								T.disco.standardValue.downJump.fly = {}
+									T.disco.standardValue.downJump.fly.x = (obj) => {
+										values = {
+											"moveRight": 0,
+											"moveTop": obj.move.vertJump.x,
+											"limit": {
+												"maxTop": {"x": -Infinity},
+												"maxBottom": {"x": Infinity},
+												"maxRight": {"x": 0},
+												"maxLeft": {"x": 100},
+											},
+											"unit": '%',
+											"actuallymove" : false,
+										}
+										return values
+									}
+								T.disco.standardValue.upJump = {}
+									T.disco.standardValue.upJump.normal = {}
+										T.disco.standardValue.upJump.normal.x = (obj) => {
+											values = {
+												"moveRight": 0,
+												"moveTop": 0,
+												"limit": {
+													"maxTop": {"x": -Infinity},
+													"maxBottom": {"x": Infinity},
+													"maxRight": {"x": 0},
+													"maxLeft": {"x": 100},
+												},
+												"unit": '%',
+												"actuallymove" : false,
+											}
+											return values
+										}
+									T.disco.standardValue.upJump.fly = {}
+										T.disco.standardValue.upJump.fly.x = (obj) => {
+											values = {
+												"moveRight": 0,
+												"moveTop": -obj.move.vertJump.x,
+												"limit": {
+													"maxTop": {"x": -Infinity},
+													"maxBottom": {"x": Infinity},
+													"maxRight": {"x": 0},
+													"maxLeft": {"x": 100},
+												},
+												"unit": '%',
+												"actuallymove" : false,
+											}
+											return values
+										}
+							T.disco.standardValue.fall = {}
+								T.disco.standardValue.fall.normal = {}
+									T.disco.standardValue.fall.normal.x = (obj) => {
+										values = {
+											"moveRight": 0,
+											"moveTop": obj.move.fallSpeed.x,
+											"limit" : undefined,
+											"unit" : "%",
+											"actuallymove" : true,
+										}
+										return values
+									}
+									T.disco.standardValue.fall.fly = {}
+										T.disco.standardValue.fall.fly.x = (obj) => {
+											values = {
+												"moveRight": 0,
+												"moveTop": 0,
+												"limit" : undefined,
+												"unit" : "%",
+												"actuallymove" : true,
+											}
+										return values
+									}
+							T.disco.standardValue.bonusCollision = {}
+								T.disco.standardValue.bonusCollision.normal = {}
+									T.disco.standardValue.bonusCollision.normal.x = () => {
+										values = {
+											"maxBonuses": 1
+										}
+										return values
+									}
+							T.disco.standardValue.enemyPath = {}
+								T.disco.standardValue.enemyPath.normal = {}
+									T.disco.standardValue.enemyPath.normal.x = (elemJSON, multiplier = 5) => {
+										let values = {
+											"x": elemJSON.path.x[0][elemJSON.path.phase.x]*multiplier,
+											"y": elemJSON.path.x[1][elemJSON.path.phase.x]*multiplier,
+										}
+										return values
+									}
+						T.disco.page = {}
+							T.disco.page.createButton = {}
+								T.disco.page.createButton.x = (name,content='Click here!',onClick=_=>_)=>{
+									let J = {
+										"content": {"x": content},
+										"onClick": {"x": onClick},
+									}
+									if(name!=undefined)
+										J.name = {"x": name}
+									return J
+								}
+							T.disco.page.home = {}
+								T.disco.page.home.buttonList = {}
+									T.disco.page.home.buttonList.x = [
+										T.disco.page.createButton.x('play','play',_=>{
+											const playground = T.disco.playground.new.x('main').x
+											T.DOM.disco.x.removeChild(document.querySelector('.disco > .pageArea'))
+											const elemDOM = T.disco.playground.launch.x(playground).x
+											T.DOM.disco.x.appendChild(elemDOM)
+											elemDOM.focus()
+										}),
+									]
+							T.disco.page.load = {}
+								T.disco.page.load.x = (page='home')=>{
+									if(T.disco.page[page]==undefined)
+										return Error()
+									T.DOM.disco.x.appendChild(T.DOM.disco.pageArea.x)
+									T.DOM.disco.pageArea.x.innerHTML = ''
+									for(const j of T.disco.page[page].buttonList.x) {
+										const elem = document.createElement('BUTTON')
+										elem.classList = 'button '+j.name.x
+										elem.innerText = j.content.x
+										elem.onclick = j.onClick.x
+										T.DOM.disco.pageArea.x.appendChild(elem)
+									}
+									if (page == 'home') {
+											document.addEventListener('keydown',e=>{
+												switch(e.key) {
+													case ' ':
+														if (Object.keys(T.disco.playground.throos.x).length === 0)
+															T.disco.page[page].buttonList.x[0].onClick.x()
+														break
+												}
+											})
+										}
+								}
+						if(!LSD.disco.record)
+							LSD.disco.record = {}
+							T.disco.record = LSD.disco.record
+							if(!T.disco.record.x)
+								T.disco.record.x = 0
+						T.disco.launch = {}
+							T.disco.launch.x = _=>{
+								main.appendChild(T.DOM.disco.x)
+								T.disco.page.load.x('home')
+							}
+			}
+			// function bodyTemp() {
+			// 	window.me = {
+			// 		disco : document.getElementById("disco"),
+			// 		timer : [],
+			// 		bonus : null,
+			// 		top : 50,
+			// 		right : 50,
+			// 		position : [this.top,this.right]
+			// 	}
+			// 	window.enemies = []
+			// 	window.bonuses = []
+			// 	window.posizionirandom = _=>{
+			// 		let
+			// 			posizioni = [],
+			// 			distanze = []
+			// 		for(let i=Math.floor(Math.random()*5)+1; i>0; i--) {
+			// 			let randomp = (Math.floor(Math.random()*6))-3
+			// 			let randomd = (Math.floor(Math.random()*6))-3
+			// 			for (let g=Math.floor(Math.random()*6); g>0; g--) {
+			// 				posizioni.push(randomp)
+			// 				distanze.push(randomd)
+			// 			}
+			// 		}
+			// 		posizioni = tornaao(posizioni)
+			// 		distanze = tornaao(distanze)
+			// 		if(posizioni.length>distanze.length) {
+			// 			for(let q=posizioni.length-distanze.length; q>0; q--)
+			// 				distanze.push(0)
+			// 		} else if(posizioni.length<distanze.length) {
+			// 			for(let q=distanze.length-posizioni.length; q>0; q--)
+			// 				posizioni.push(0)
+			// 		}
+			// 		return ([posizioni,distanze])
+			// 	}
+			// 	window.tornaao = (posizioni)=>{
+			// 		let sommatoria = 0
+			// 		for(let e=0; e<posizioni.length; e++)
+			// 			sommatoria += posizioni[e]
+			// 		if(sommatoria%3==0) {
+			// 			for(let d=Math.abs(sommatoria/3); d>0; d--) {
+			// 				if(sommatoria>0)
+			// 					posizioni.push(-3)
+			// 				else
+			// 					posizioni.push(3)
+			// 			}
+			// 		} else if(sommatoria%2==0) {
+			// 			for(let d=Math.abs(sommatoria/2); d>0; d--) {
+			// 				if(sommatoria>0)
+			// 					posizioni.push(-2)
+			// 				else
+			// 					posizioni.push(2)
+			// 			}
+			// 		} else {
+			// 			for(let d=Math.abs(sommatoria); d>0; d--) {
+			// 				if(sommatoria>0)
+			// 					posizioni.push(-1)
+			// 				else
+			// 					posizioni.push(1)
+			// 			}
+			// 		}
+			// 		posizioni.push(0)
+			// 		return posizioni
+			// 	}
+			// 	class enemy {
+			// 		constructor() {
+			// 		let nemico = document.createElement("h1");
+			// 		this.nemico = nemico;
+			// 		this.corpo = nemico;
+			// 		nemico.innerHTML = "⬤";
+			// 		nemico.classList.add("enemy");
+			// 		document.body.appendChild(nemico);
+			// 		this.posizioni = posizionirandom();
+			// 		this.posizionitop = this.posizioni[0];
+			// 		this.posizioniright = this.posizioni[1];
+			// 		this.top = Math.floor(Math.random() * 19) * 5;
+			// 		this.right = Math.floor(Math.random() * 20) * 5;
+			// 		nemico.style.top = this.top + "%";
+			// 		nemico.style.right = this.right + "%";
+			// 		this.momentotop = 0;
+
+			// 		// Utilizzare una funzione freccia per mantenere il contesto di `this`
+			// 		this.muovi = () => this.muovinemico();
+			// 		}
+
+			// 		muovinemico() {
+			// 		this.top = this.top + ((this.posizionitop[this.momentotop])*5);
+			// 		this.nemico.style.top = this.top + "%";
+			// 		this.right = this.right + ((this.posizioniright[this.momentotop])*5);
+			// 		this.nemico.style.right = this.right + "%"; 
+			// 		this.momentotop++;
+			// 		if (this.momentotop == this.posizionitop.length-1) {
+			// 			this.momentotop = 0;
+			// 		}
+			// 		}
+			// 	}
+			// 	window.counter = {
+			// 		"attuale": -1,
+			// 		"record": 0,
+			// 	}
+			// 	window.traguardo = {
+			// 		"body": document.getElementById("traguardo"),
+			// 		"top": undefined,
+			// 		"right": undefined,
+			// 		"nuovo": _=>newtraguardo()
+			// 	}
+			// 	window.newtraguardo = _=>{
+			// 		let sopra = Math.floor(Math.random()*17)*5;
+			// 		let destra = (Math.floor(Math.random()*19)*5)+5;
+			// 		traguardo.top = sopra;
+			// 		traguardo.right = destra;
+			// 		let ctraguardo = document.getElementById("traguardo");
+			// 		ctraguardo.style.top = sopra + '%';
+			// 		ctraguardo.style.right = destra + '%';
+			// 		counter.attuale++
+			// 		if (counter.attuale % 3 == 0 && counter.attuale !== 0) {
+			// 			let tempo = Math.random() *10000;
+			// 			let timer = setTimeout (newbonus,tempo);
+			// 			me.timer.push(timer);
+			// 		}
+			// 		if (counter.attuale > 0) {
+			// 		enemies.push(new enemy);}
+			// 		if (counter.attuale > counter.record) {
+			// 			counter.record++
+			// 			document.getElementById("record").innerHTML = "record: " + counter.record
+			// 		}
+			// 		document.getElementById("attuale").innerHTML = counter.attuale;
+			// 	}
+			// 	window.newbonus = _=>bonuses.push(new bonus)
+			// 	class bonus {
+			// 		constructor() {
+			// 			let tipologie = ["INVINCIBLE","STRONG","DOUBLE","FLY","FREEZE"];
+			// 			let colori = ["#FF00FB","#FF6000","#A3FF00","#B5DCFF","#0003BF"]
+			// 			let random = Math.floor(Math.random()*5);
+			// 			this.type = tipologie[random];
+			// 			this.fisico = document.createElement ("h1");
+			// 			this.fisico.style.color = colori[random]
+			// 			this.fisico.classList.add("bonus");
+			// 			this.fisico.innerHTML = "✭";
+			// 			this.fisico.style.position = "absolute";
+			// 			document.body.appendChild(this.fisico);
+			// 			this.top = Math.floor(Math.random()*19)*5;
+			// 			this.right = (Math.floor(Math.random()*19)*5)+5;
+			// 			this.fisico.style.top = this.top + "%";
+			// 			this.fisico.style.right = this.right + "%";
+			// 		}
+			// 	}
+			// 	window.left = _=>{
+			// 		if(me.bonus!=='FLY')
+			// 			me.top -= 10
+			// 		if(me.right<100)
+			// 			me.right += 5
+			// 		me.disco.style.top = me.top+'%'
+			// 		me.disco.style.right = me.right+'%'
+			// 	}
+			// 	window.rightm = _=>{
+			// 		if(me.bonus!=='FLY')
+			// 			me.top -= 10
+			// 		if(me.right>0)
+			// 			me.right -= 5
+			// 		me.disco.style.top = me.top+'%'
+			// 		me.disco.style.right = me.right+'%'
+			// 	}
+			// 	window.up = _=>{
+			// 		me.top -= 5
+			// 		me.disco.style.top = me.top+'%'
+			// 	}
+			// 	window.down = _=>{
+			// 		me.top += 5
+			// 		me.disco.style.top = me.top+'%'
+			// 	}
+			// }
+			// window.launchGame = _=>{
+			// 	document.addEventListener('keydown', function(event) {
+			// 			switch(event.key) {
+			// 				case 'ArrowLeft':
+			// 					left();
+			// 					break;
+			// 				case 'ArrowRight':
+			// 					rightm();
+			// 					break;
+			// 				case 'ArrowDown':
+			// 					if (me.bonus == "FLY") {
+			// 					down()}
+			// 					break;
+			// 				case 'ArrowUp':
+			// 					if (me.bonus == "FLY") {
+			// 					up()}
+			// 					break;
+			// 				default:
+			// 			}
+			// 		});
+
+			// 	let disco = document.getElementById("disco");
+			// 	traguardo.nuovo();
+
+
+
+			// 	window.muovinemici = _=>{
+			// 		if(me.bonus!=='FREEZE')
+			// 			enemies.forEach((enemy)=>enemy.muovi())
+			// 	}
+			// 	window.checkbonus = _=>{
+			// 		bonuses.forEach((bonus)=>{
+			// 			if (scontro(me.disco,bonus.fisico) && me.bonus == null) {
+			// 				bonus.fisico.remove();
+			// 				me.bonus = bonus.type
+			// 				if (me.bonus == "FLY") {
+			// 					document.getElementById("up").style.display = "block";
+			// 					document.getElementById("down").style.display = "block";
+			// 				}
+			// 				let indicatore = document.getElementById("bonus");
+			// 				let countdown = Math.floor(Math.random()*10)+5
+			// 				indicatore.innerHTML = bonus.type + "<br>" + countdown
+			// 				let tempobonus = setInterval(() => {
+			// 					countdown--;
+			// 					indicatore.innerHTML = bonus.type + "<br>" + countdown;
+			// 					if (countdown < 1 || me.bonus == null) {
+			// 						document.getElementById("up").style.display = "none";
+			// 						document.getElementById("down").style.display = "none";
+			// 						clearInterval(tempobonus)
+			// 						me.bonus = null;
+			// 						indicatore.innerHTML = "";
+			// 					}
+			// 				},1000)
+			// 			}	 
+			// 		})
+			// 	}
+			// 	window.checkwin = _=>{
+			// 	if (scontro(me.disco,traguardo.body)) {
+			// 		traguardo.nuovo();
+			// 	}
+			// 	}
+
+			// 	window.checklose = _=>{
+			// 		if (me.bonus !== "INVINCIBLE") {
+			// 		enemies.forEach(function(enemy) {
+			// 			if (scontro(me.disco,enemy.corpo)) {
+			// 				if (me.bonus == "STRONG") {
+			// 					enemy.corpo.remove();
+			// 					let index = enemies.indexOf(enemy);
+			// 					if (index !== -1) {
+			// 						enemies.splice(index, 1);}
+			// 					me.bonus = null;
+			// 				} else {sconfitta ();}
+			// 			} 
+			// 		})}
+
+			// 		if (me.top > 100) {
+			// 			caduta();
+			// 		}
+			// 		else {document.getElementById("cadi").style.display = "none";
+			// }
+			// 	}
+			// 	window.caduta = _=>{
+			// 		document.getElementById("cadi").style.display = "block" ;
+			// 		if (me.top > 150) {
+			// 			sconfitta();
+			// 			me.top = 30;
+			// 		}
+			// 	}
+			// 	window.sconfitta = _=>{
+			// 		me.timer.forEach((timer)=>clearTimeout(timer))
+			// 		me.timer = []
+			// 		me.bonus = null
+			// 		enemies.forEach((enemy)=>enemy.corpo.remove())
+			// 		bonuses.forEach((bonus)=>bonus.fisico.remove())
+			// 		bonuses = []
+			// 		enemies = []
+			// 		counter.attuale = 0
+			// 		let contatore = document.getElementById('attuale')
+			// 		contatore.innerHTML = counter.attuale
+			// 		contatore.style.color = 'red'
+			// 		setTimeout(_=>contatore.style.color='white',500)
+			// 	}
+			// 	window.scendi = _=>{
+			// 	if (me.bonus !== "FLY") {
+			// 	me.top += 2.5;
+			// 	disco.style.top = me.top + '%';}
+			// 	}
+			// 	setInterval(scendi,100)
+			// 	setInterval(checkwin,50)
+			// 	setInterval(checklose,50)
+			// 	setInterval(checkbonus,50)
+			// 	setInterval(muovinemici,600)
+			// }
+			window.onload = _=>{
+				document.addEventListener('touchmove', (e)=>{
+				if (e.scale !== true) {
+				    e.preventDefault();
+				  }
+				}, {
+				  passive: false
+				});
+				launchT()
+				document.body.appendChild(main)
+				
+				T.disco.launch.x()
+				// bodyTemp()
+				// launchGame()
+				document.getElementById('loadingAdv').outerHTML = ''
+			}
+		</script>
+	</head>
+	<body type="text/HTML">
+		<div id="loadingAdv">
+			<div class="loadingBackground"></div>
+			<div class="script">Loading…</div>
+			<style>
+				body {
+					background: black;
+				}
+				#loadingAdv>.script {
+					position: fixed;
+					position: absolute;
+					left: 50%;
+					bottom: 50%;
+					font-size: 5em;
+					transform: translate(-50%,50%);
+					color: white;
+				}
+				.loadingBackground {
+					display: block;
+					position: absolute;
+					left: 0;
+					top: 0;
+					width: 100%;
+					height: 100%;
+					background-image: radial-gradient(circle at center, transparent,black),url('./sfondo.png');
+					background-color: black;
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-position: center;
+					filter: grayscale(30%);
+					z-index: -32768;
+				}
+			</style>
+		</div><!-- 
+		<h3 id=record></h3>
+		<h3 id=cadi>you are falling</h3>
+		<h3 id=bonus></h3>
+		<h1 id=attuale></h1>
+		<h1 id="disco">⬤</h1>
+		<h1 id="traguardo">⬤</h1>
+		<button id="left" onclick="left()"></button>
+		<button id="right" onclick="rightm()"></button>
+		<button id="up" onclick="up()"></button>
+		<button id="down" onclick="down()"></button> -->
+	</body>
+</html>
